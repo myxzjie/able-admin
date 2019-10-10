@@ -1,7 +1,9 @@
 package controllers
 
 import (
-	"github.com/myxzjie/go-cms/models"
+	"github.com/astaxie/beego/logs"
+	"github.com/astaxie/beego/orm"
+	"github.com/myxzjie/go-cms/services"
 )
 
 type MainController struct {
@@ -9,14 +11,22 @@ type MainController struct {
 	// beego.Controller
 }
 
-func (c *MainController) Get() {
+func (this *MainController) Get() {
 	// result := models.Demo{}
 	// err := M.Object().QueryTable(new(models.Demo)).One(&result)
 	// if err != nil {
 
 	// }
-	models.NewDemo().FindByIdentify(1)
-	c.Data["Website"] = "beego.me"
-	c.Data["Email"] = "astaxie@gmail.com"
-	c.TplName = "index.tpl"
+	data, err := services.NewDemoService().FindByIdentify(1)
+	if err != nil {
+		if err == orm.ErrNoRows {
+			logs.Error(" not data")
+		}
+		logs.Error(" get data err")
+	}
+	logs.Info(data)
+	// models.NewDemo().FindByIdentify(1)
+	this.Data["Website"] = "beego.me"
+	this.Data["Email"] = "astaxie@gmail.com"
+	this.TplName = "index.tpl"
 }
