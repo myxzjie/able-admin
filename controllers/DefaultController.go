@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
-	"github.com/myxzjie/go-cms/services"
+	"github.com/myxzjie/able-admin/services"
 )
 
 type MainController struct {
@@ -28,5 +28,6 @@ func (this *MainController) Get() {
 	// models.NewDemo().FindByIdentify(1)
 	this.Data["Website"] = "beego.me"
 	this.Data["Email"] = "astaxie@gmail.com"
-	this.TplName = "index.tpl"
+	logs.Info(">>" + viewTemplate("index"))
+	this.TplName = viewTemplate("index")
 }
