@@ -1,6 +1,7 @@
 package services
 
 import (
+	"github.com/astaxie/beego/logs"
 	"github.com/myxzjie/able-admin/models"
 )
 
@@ -15,6 +16,7 @@ func NewDemoService() *DemoService {
 func (m *DemoService) FindByIdentify(id int, cols ...string) (result *models.Demo, err error) {
 	// o := orm.NewOrm()
 	result = &models.Demo{}
-	err = getOrm().QueryTable("demo").Filter("id", id).One(result)
+	logs.Info(new(models.Demo))
+	err = getOrm().QueryTable(new(models.Demo)).Filter("id", id).One(result)
 	return
 }

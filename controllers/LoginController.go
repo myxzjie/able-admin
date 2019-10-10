@@ -15,13 +15,13 @@ func (this *LoginController) Get() {
 }
 
 func (this *LoginController) LoginSubmit() {
-	username := this.GetString("username")
-	// password := this.GetString("password")
-	data, err := services.NewAccountService().FindAccount(username)
+	// username := this.GetString("username")
+	password := this.GetString("password")
+	data, err := services.NewAccountService().AccountLogin("demo", password)
 	if err != nil {
-
+		logs.Error(">> err", err)
+		this.jsonResult(1, err.Error())
 	}
-	logs.Info(data)
-	// data.name
+	logs.Info(data.Name)
 	this.jsonResult(0, "ok")
 }

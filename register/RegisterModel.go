@@ -3,12 +3,13 @@ package register
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"github.com/myxzjie/go-cms/models"
+	"github.com/myxzjie/able-admin/models"
 )
 
 // RegisterModel 注册Model
 func RegisterModel() {
 	orm.RegisterModelWithPrefix(GetDatabasePrefix(),
+		new(models.Account),
 		new(models.Demo))
 }
 

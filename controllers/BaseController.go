@@ -17,7 +17,7 @@ type BaseController struct {
 	beego.Controller
 }
 
-func (this *BaseController) viewTemplate(value string) (result string) {
+func viewTemplate(value string) (result string) {
 	result = value + suffix
 	return
 }
