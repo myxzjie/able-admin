@@ -1,7 +1,10 @@
 package register
 
 import (
-	"github.com/myxzjie/go-cms/register"
+	"log"
+	"os"
+
+	"github.com/astaxie/beego"
 )
 
 var (
@@ -11,5 +14,12 @@ var (
 )
 
 func InitRegister() {
-	register.RegisterDataBase()
+	err := beego.LoadAppConfig("ini", ConfigurationFile)
+	if err != nil {
+		log.Println("An error occurred:", err)
+		os.Exit(1)
+	}
+	RegisterDataBase()
+	RegisterModel()
+	RegisterLogger(LogFile)
 }
