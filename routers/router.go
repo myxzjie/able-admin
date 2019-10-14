@@ -16,4 +16,5 @@ func init() {
 	beego.Router("/demo/index", &controllers.DemoController{}, "*:Get")
 	//
 	beego.Router("/account/index", &controllers.AccountController{}, "*:Get")
+	beego.Router("/account/datapage", &controllers.AccountController{}, "*:DataPage")
 }

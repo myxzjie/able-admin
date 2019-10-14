@@ -10,6 +10,7 @@ var (
 var (
 	SessionName    = beego.AppConfig.DefaultString("sessionname", "sid")
 	DatabasePrefix = beego.AppConfig.DefaultString("database::db_prefix", "")
+	Driver         = beego.AppConfig.String("database::db_driver")
 )
 
 const (

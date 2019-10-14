@@ -26,3 +26,8 @@ type Account struct {
 func NewAccount() *Account {
 	return &Account{}
 }
+
+// TableName 获取对应数据库表名.
+// func (m *Account) TableName() string {
+// 	return new(Account).(string)
+// }
