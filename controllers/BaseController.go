@@ -3,23 +3,45 @@ package controllers
 import (
 	"compress/gzip"
 	"encoding/json"
+	"errors"
+	"html/template"
 	"io"
 	"strings"
 
 	"github.com/astaxie/beego"
-)
-
-var (
-	suffix = ".html"
+	"github.com/astaxie/beego/logs"
+	"github.com/myxzjie/able-admin/models"
+	"github.com/myxzjie/able-admin/utils"
 )
 
 type BaseController struct {
 	beego.Controller
 }
 
-func viewTemplate(value string) (result string) {
-	result = value + suffix
-	return
+func viewTemplate(value string) string {
+	view := value + utils.Suffix
+	return view
+}
+
+// Prepare 预处理.
+func (this *BaseController) Prepare() {
+	// form
+	this.Data["xsrfdata"] = template.HTML(this.XSRFFormHTML())
+	// ajax
+	this.Data["xsrf_token"] = this.XSRFToken()
+
+	// session
+	this.Data["account"] = this.GetAccountSession()
+}
+
+func (this *BaseController) GetAccountSession() models.Account {
+	data, ok := this.GetSession(utils.SESSION_USER).(models.Account)
+	logs.Debug(">> session:", data)
+	if !ok {
+		errors.New("session nil")
+	}
+	return data
+
 }
 
 // JsonResult 响应 json 结果

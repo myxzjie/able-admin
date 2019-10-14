@@ -4,11 +4,12 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/myxzjie/able-admin/models"
+	"github.com/myxzjie/able-admin/utils"
 )
 
 // RegisterModel 注册Model
 func RegisterModel() {
-	orm.RegisterModelWithPrefix(GetDatabasePrefix(),
+	orm.RegisterModelWithPrefix(utils.DatabasePrefix,
 		new(models.Account),
 		new(models.Demo))
 }

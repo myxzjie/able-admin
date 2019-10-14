@@ -4,11 +4,11 @@ import "time"
 
 type Account struct {
 	Id         int64
-	Name       string
+	Name       string `form:"username"`
 	NickName   string
 	Phone      string
 	Email      string
-	Password   string
+	Password   string `form:"password"`
 	Salt       string
 	State      string
 	CreateDate time.Time
@@ -21,4 +21,8 @@ type Account struct {
 	Locked     string
 	OrgId      string
 	Avatar     string
+}
+
+func NewAccount() *Account {
+	return &Account{}
 }

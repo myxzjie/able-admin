@@ -16,6 +16,11 @@ func (c *ErrorController) Error501() {
 	c.TplName = "error/501.html"
 }
 
+func (c *ErrorController) Error500() {
+	c.Data["content"] = "server error"
+	c.TplName = "error/500.html"
+}
+
 func (c *ErrorController) ErrorDb() {
 	c.Data["content"] = "database is now down"
 	c.TplName = "error/dberror.html"
